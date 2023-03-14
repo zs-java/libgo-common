@@ -3,7 +3,13 @@ package assert
 import "log"
 
 func NotNil(val interface{}) {
-	if val != nil {
+	if val == nil {
+		return
+	}
+	switch val.(type) {
+	case error:
+		panic(val)
+	default:
 		log.Panic("not nil", val)
 	}
 }
