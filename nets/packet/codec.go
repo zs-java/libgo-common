@@ -25,7 +25,9 @@ func MarshalBody(packet *Packet) []byte {
 	var buf []byte
 	buf = append(buf, Int2Byte(packet.Cmd)...)
 	buf = append(buf, Int2Byte(packet.TransactionId)...)
-	buf = append(buf, packet.Data...)
+	if packet.Data != nil {
+		buf = append(buf, packet.Data...)
+	}
 	return buf[:]
 }
 
